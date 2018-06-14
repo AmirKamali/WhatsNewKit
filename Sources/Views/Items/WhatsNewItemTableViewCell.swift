@@ -64,6 +64,13 @@ class WhatsNewItemTableViewCell: UITableViewCell {
             // Set original image
             self.imageView?.image = self.item.image
         }
+        self.imageView?.contentMode = self.configuration.itemsView.imageContentMode
+        if let fixedSize = self.configuration.itemsView.imageSize, let originalFrame = imageView?.frame {
+            self.imageView?.frame = CGRect(x: originalFrame.origin.x,
+                                           y: originalFrame.origin.y,
+                                           width: fixedSize.width,
+                                           height: fixedSize.height)
+        }
     }
     
     /// Configure TextLabel

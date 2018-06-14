@@ -28,6 +28,12 @@ public extension WhatsNewViewController {
         /// Boolean if Image should be auto tinted
         public var autoTintImage: Bool
         
+        /// Fixed image size
+        public var imageSize: CGSize?
+        
+        /// Image content mode
+        public var imageContentMode: UIViewContentMode
+        
         /// The Animation
         public var animation: Animation?
         
@@ -52,6 +58,7 @@ public extension WhatsNewViewController {
             self.subtitleColor = subtitleColor
             self.autoTintImage = autoTintImage
             self.animation = animation
+            self.imageContentMode = .center
         }
         
     }
