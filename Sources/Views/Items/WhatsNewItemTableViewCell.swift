@@ -10,7 +10,7 @@ import UIKit
 
 /// The WhatsNewItemTableViewCell
 class WhatsNewItemTableViewCell: UITableViewCell {
-    
+    var iconImageView:UIImageView?
     // MARK: Properties
     
     /// The Item
@@ -55,24 +55,41 @@ class WhatsNewItemTableViewCell: UITableViewCell {
     /// Configure ImageView
     private func configureImageView() {
         // Check if autoTintImage is activated
+        guard let imageView = self.item.imageView else {
+            return
+        }
+        
+        self.iconImageView = imageView
+        self.imageView?.image = imageWithSize(size: imageView.frame.size)
+        self.contentView.addSubview(imageView)
+        
+        
         if self.configuration.itemsView.autoTintImage {
             // Set template tinted image
-            let templateImage = self.item.image?.withRenderingMode(.alwaysTemplate)
-            self.imageView?.image = templateImage
-            self.imageView?.tintColor = self.configuration.tintColor
-        } else {
-            // Set original image
-            self.imageView?.image = self.item.image
-        }
-        self.imageView?.contentMode = self.configuration.itemsView.imageContentMode
-        if let fixedSize = self.configuration.itemsView.imageSize, let originalFrame = imageView?.frame {
-            self.imageView?.frame = CGRect(x: originalFrame.origin.x,
-                                           y: originalFrame.origin.y,
-                                           width: fixedSize.width,
-                                           height: fixedSize.height)
-        }
+            let templateImage = imageView.image?.withRenderingMode(.alwaysTemplate)
+            imageView.image = templateImage
+            imageView.tintColor = self.configuration.tintColor
+        } 
+        
     }
-    
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        if let frame = self.imageView?.frame {
+            iconImageView?.frame = frame
+        }
+        
+    }
+    func imageWithSize(size: CGSize, filledWithColor color: UIColor = UIColor.clear, scale: CGFloat = 0.0, opaque: Bool = false) -> UIImage {
+        let rect = CGRect(x:0, y:0,width: size.width,height: size.height)
+        
+        UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
+        color.set()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image ?? UIImage()
+    }
     /// Configure TextLabel
     private func configureTextLabel() {
         // Set attributed text
@@ -114,5 +131,5 @@ class WhatsNewItemTableViewCell: UITableViewCell {
             return attributedString
         }
     }
-
+    
 }

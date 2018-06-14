@@ -24,7 +24,7 @@ public extension WhatsNew {
         public let subtitle: String
         
         /// The Image
-        public let image: UIImage?
+        public let imageView: UIImageView?
         
         // MARK: Initializer
         
@@ -36,10 +36,10 @@ public extension WhatsNew {
         ///   - image: The Image
         public init(title: String,
                     subtitle: String,
-                    image: UIImage?) {
+                    imageView: UIImageView?) {
             self.title = title
             self.subtitle = subtitle
-            self.image = image
+            self.imageView = imageView
         }
         
     }
@@ -74,10 +74,11 @@ extension WhatsNew.Item: Codable {
         // Check if Base64 Image String is available
         if let base64 = try container.decodeIfPresent(String.self, forKey: .image) {
             // Decode Base64 to Image
-            self.image = Data(base64Encoded: base64, options: .ignoreUnknownCharacters).flatMap(UIImage.init)
+            let image = Data(base64Encoded: base64, options: .ignoreUnknownCharacters).flatMap(UIImage.init)
+            self.imageView = UIImageView(image: image )
         } else {
             // No image base64 representation available
-            self.image = nil
+            self.imageView = nil
         }
     }
     
@@ -93,7 +94,7 @@ extension WhatsNew.Item: Codable {
         // Encode Subtitle
         try container.encode(self.subtitle, forKey: .subtitle)
         // Try to Encode Image as Base64 string
-        if let image = self.image, let data = UIImagePNGRepresentation(image) {
+        if let image = self.imageView?.image, let data = UIImagePNGRepresentation(image) {
             let base64 = data.base64EncodedString(options: .lineLength64Characters)
             try container.encode(base64, forKey: .image)
         }
