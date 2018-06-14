@@ -59,6 +59,13 @@ class WhatsNewItemTableViewCell: UITableViewCell {
             // Set template tinted image
             let templateImage = self.item.image?.withRenderingMode(.alwaysTemplate)
             self.imageView?.image = templateImage
+            self.imageView?.contentMode = self.configuration.itemsView.imageContentMode
+            if let fixedSize = self.configuration.itemsView.imageSize, let originalFrame = imageView?.frame {
+                self.imageView?.frame = CGRect(x: originalFrame.origin.x,
+                                               y: originalFrame.origin.y,
+                                               width: fixedSize.width,
+                                               height: fixedSize.height)
+            }
             self.imageView?.tintColor = self.configuration.tintColor
         } else {
             // Set original image
