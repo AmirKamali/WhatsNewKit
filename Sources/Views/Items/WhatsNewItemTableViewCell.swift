@@ -63,7 +63,6 @@ class WhatsNewItemTableViewCell: UITableViewCell {
         self.imageView?.image = imageWithSize(size: imageView.frame.size)
         self.contentView.addSubview(imageView)
         
-        
         if self.configuration.itemsView.autoTintImage {
             // Set template tinted image
             let templateImage = imageView.image?.withRenderingMode(.alwaysTemplate)
@@ -76,11 +75,12 @@ class WhatsNewItemTableViewCell: UITableViewCell {
         super.layoutIfNeeded()
         if let frame = self.imageView?.frame {
             iconImageView?.frame = frame
+            iconImageView?.tintColor = self.configuration.tintColor
         }
         
     }
     func imageWithSize(size: CGSize, filledWithColor color: UIColor = UIColor.clear, scale: CGFloat = 0.0, opaque: Bool = false) -> UIImage {
-        let rect = CGRect(x:0, y:0,width: size.width,height: size.height)
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         
         UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
         color.set()
