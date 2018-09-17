@@ -13,7 +13,7 @@ import UIKit
 public extension WhatsNewViewController {
     
     /// The WhatsNewViewController Configuration
-    struct Configuration: Equatable {
+    struct Configuration {
         
         /// The background color
         public var backgroundColor: UIColor

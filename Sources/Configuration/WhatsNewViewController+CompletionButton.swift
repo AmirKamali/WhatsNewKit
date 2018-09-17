@@ -13,8 +13,8 @@ import UIKit
 public extension WhatsNewViewController {
     
     /// The CompletionButton
-    struct CompletionButton: Equatable {
-        
+    struct CompletionButton {
+
         /// The Title
         public var title: String
         

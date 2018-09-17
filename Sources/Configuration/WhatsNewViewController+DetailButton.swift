@@ -13,7 +13,7 @@ import UIKit
 public extension WhatsNewViewController {
     
     /// The DetailButton
-    struct DetailButton: Equatable {
+    struct DetailButton {
         
         /// The Title
         public var title: String

@@ -10,7 +10,7 @@ import UIKit
 
 /// The WhatsNewItemTableViewCell
 class WhatsNewItemTableViewCell: UITableViewCell {
-    var iconImageView:UIImageView?
+    var iconImageView: UIImageView?
     // MARK: Properties
     
     /// The Item
@@ -79,7 +79,8 @@ class WhatsNewItemTableViewCell: UITableViewCell {
         }
         
     }
-    func imageWithSize(size: CGSize, filledWithColor color: UIColor = UIColor.clear, scale: CGFloat = 0.0, opaque: Bool = false) -> UIImage {
+    func imageWithSize(size: CGSize, filledWithColor color: UIColor = UIColor.clear,
+                       scale: CGFloat = 0.0, opaque: Bool = false) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         
         UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
@@ -119,12 +120,12 @@ class WhatsNewItemTableViewCell: UITableViewCell {
             let attributedString = NSMutableAttributedString(string: "\(self.item.title)\n\(self.item.subtitle)")
             // Add title font
             attributedString.addAttributes(
-                [NSAttributedStringKey.font: self.configuration.itemsView.titleFont],
+                [NSAttributedString.Key.font: self.configuration.itemsView.titleFont],
                 range: NSRange(location: 0, length: self.item.title.count)
             )
             // Add title color
             attributedString.addAttributes(
-                [NSAttributedStringKey.foregroundColor: self.configuration.itemsView.titleColor],
+                [NSAttributedString.Key.foregroundColor: self.configuration.itemsView.titleColor],
                 range: NSRange(location: 0, length: self.item.title.count)
             )
             // Return attributed title and text string
